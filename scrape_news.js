@@ -3,7 +3,17 @@ import puppeteer from 'puppeteer';
 
 export let scrape = async () => {
     // Launch the browser and open a new blank page
-    const browser = await puppeteer.launch(/* {headless: false} */);
+    const browser = await puppeteer.launch({
+  args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-accelerated-2d-canvas',
+    '--no-first-run',
+    '--no-zygote',
+    '--disable-gpu'
+  ]
+    }/* {headless: false} */);
                 // const ua = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36";
                 //await page.setUserAgent(ua);
                 //await page.goto(yourURL); Для установки header(обход блокировок) ссылка https://stackoverflow.com/questions/63818869/why-does-headless-need-to-be-false-for-puppeteer-to-work
@@ -31,5 +41,6 @@ export let scrape = async () => {
   
   return {title, text, href}  
 }
+
 
 //scrape()
